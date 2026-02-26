@@ -32,8 +32,7 @@
                 "deb"
             ],
             "category": "AudioVideo",
-            "executableName": "home-theater",
-            "icon": "build/icon.png"
+            "executableName": "home-theater"
         },
         "deb": {
             "depends": [
