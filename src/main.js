@@ -13,6 +13,7 @@ function createWindow() {
         minWidth: 960,
         minHeight: 540,
         title: "Home Theater",
+        icon: path.join(__dirname, '..', 'build', 'icon.png'),
         autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: false,

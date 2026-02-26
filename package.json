@@ -17,6 +17,7 @@
         "electron-builder": "^24.13.3"
     },
     "build": {
+        "asar": false,
         "appId": "com.kaptanoguz.hometheater",
         "productName": "Home Theater",
         "directories": {
@@ -31,7 +32,8 @@
                 "deb"
             ],
             "category": "AudioVideo",
-            "executableName": "home-theater"
+            "executableName": "home-theater",
+            "icon": "build/icon.png"
         },
         "deb": {
             "depends": [
