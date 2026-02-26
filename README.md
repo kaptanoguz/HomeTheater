@@ -1,9 +1,9 @@
 # Home Theater
 
-A modern, self-hosted media catalog and player for your local movie and TV series collection.
+A modern, native desktop application to catalog and play your local movie and TV series collection.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
-![Flask](https://img.shields.io/badge/Flask-Web_App-green)
+![PyQt5](https://img.shields.io/badge/PyQt5-Desktop_App-green)
 ![License](https://img.shields.io/badge/License-GPL--3.0-red)
 ![Platform](https://img.shields.io/badge/Platform-Linux-yellow)
 
@@ -16,11 +16,19 @@ A modern, self-hosted media catalog and player for your local movie and TV serie
 - ❤️ **Favorites** — mark and filter your favorite titles
 - 🎥 **Built-in Player** — watch directly in the app with subtitle support
 - 📝 **Subtitle Search** — find and download subtitles from OpenSubtitles
-- 📺 **TV Series** — browse by season and episode with a Netflix-style interface
+- 📺 **TV Series** — browse by season and episode
+- 🌙 **Dark Theme** — Netflix-inspired dark UI
 
-## Screenshots
+## Project Structure
 
-> Launch the app and set up your directories to see it in action!
+```
+HomeTheater/
+├── main.py          # PyQt5 desktop application (UI)
+├── backend.py       # Config, cache, scanning, metadata
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
 
 ## Installation
 
@@ -29,7 +37,7 @@ A modern, self-hosted media catalog and player for your local movie and TV serie
 Download the latest `.deb` from [Releases](https://github.com/kaptanoguz/HomeTheater/releases):
 
 ```bash
-sudo dpkg -i home-theater_1.0.0_amd64.deb
+sudo dpkg -i home-theater_2.0.0_amd64.deb
 sudo apt install -f  # Install any missing dependencies
 ```
 
@@ -44,23 +52,21 @@ home-theater
 ```bash
 git clone https://github.com/kaptanoguz/HomeTheater.git
 cd HomeTheater
-python3 -m venv venv
-source venv/bin/activate
 pip install -r requirements.txt
-python app.py
+python main.py
 ```
 
-**System dependencies (optional, for native window):**
+**System dependencies:**
 
 ```bash
-sudo apt install python3-gi gir1.2-webkit2-4.1
+sudo apt install python3-pyqt5 python3-pyqt5.qtmultimedia \
+    gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
+    gstreamer1.0-libav ffmpeg
 ```
-
-Without these, the app opens in your default web browser.
 
 ## Setup
 
-On first launch, you'll see a **Welcome** screen where you configure:
+On first launch, a **Welcome** dialog will prompt you to configure:
 
 | Setting | Description |
 |---------|-------------|
@@ -90,14 +96,17 @@ On first launch, you'll see a **Welcome** screen where you configure:
 
 1. **Scanning** — The app scans your configured directories for video files (`.mp4`, `.mkv`, `.avi`, `.mov`, `.wmv`, `.flv`, `.webm`, `.m4v`)
 2. **Metadata** — For each video, it extracts a clean title from the filename and queries OMDB for poster, rating, plot, and genre
-3. **Playback** — Videos stream directly through your browser. Formats like `.avi` and `.wmv` are automatically transcoded via ffmpeg
-4. **Subtitles** — Local `.srt`/`.vtt` files are auto-detected. You can also search OpenSubtitles or drag-and-drop subtitle files
+3. **Browsing** — Movies display in a responsive poster grid; TV series open in a season/episode browser
+4. **Playback** — Videos play in the built-in Qt media player. GStreamer handles format decoding
+5. **Subtitles** — Local `.srt`/`.vtt` files are auto-detected. You can also search OpenSubtitles
 
-## Dependencies
+## Technology Stack
 
-- Python 3.8+
-- Flask & Waitress (production WSGI server)
-- ffmpeg (for non-native video format transcoding)
+- **Python 3.8+** — Core language
+- **PyQt5** — Native desktop UI framework
+- **GStreamer** — Media playback backend
+- **OMDB API** — Movie metadata and posters
+- **OpenSubtitles API** — Subtitle search and download
 
 ## License
 
