@@ -1,0 +1,24 @@
+# Virtual environment
+venv/
+__pycache__/
+
+# User data
+config.json
+data_cache.json
+error_log.txt
+static/posters/*
+!static/posters/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+*.spec
+*.exe
