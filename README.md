@@ -23,12 +23,20 @@ A modern, native desktop application to catalog and play your local movie and TV
 
 ```
 HomeTheater/
-├── main.py          # PyQt5 desktop application (UI)
-├── backend.py       # Config, cache, scanning, metadata
-├── requirements.txt
+├── main.py                # PyQt5 desktop application (UI)
+├── backend.py             # Config, cache, scanning, metadata
+├── requirements.txt       # PyQt5 dependencies
+├── flask-web-version/     # Alternative Web/HTML based version
+│   ├── app.py
+│   ├── templates/
+│   └── requirements.txt
 ├── LICENSE
 └── README.md
 ```
+
+Home Theater comes in two versions:
+1. **Native Desktop App (Default)** — Built with PyQt5. Best for daily desktop use.
+2. **Web Version (`flask-web-version/`)** — Built with Flask and HTML/JS. Best if you want to run it on a server and access it from a browser.
 
 ## Installation
 
@@ -55,6 +63,8 @@ cd HomeTheater
 pip install -r requirements.txt
 python main.py
 ```
+
+*Note: If you prefer the web-based version, navigate to the `flask-web-version` directory and run `app.py` instead.*
 
 **System dependencies:**
 

@@ -626,59 +626,16 @@ threading.Thread(target=metadata_worker, daemon=True).start()
 # --- Main Entry Point ---
 
 if __name__ == '__main__':
-    webview = None
-    should_try_webview = True
-
-    if sys.platform.startswith('linux'):
-        try:
-            import gi  # noqa: F401
-        except ImportError:
-            should_try_webview = False
-            print("System libraries (python3-gi) not found. Opening in browser.")
-
-    if should_try_webview:
-        try:
-            import webview
-        except Exception:
-            print("pywebview not available. Opening in browser.")
-            webview = None
-
-    def start_server():
-        from waitress import serve
-        print("Server starting at http://127.0.0.1:5000")
-        serve(app, host='127.0.0.1', port=5000, threads=20)
-
+    from waitress import serve
+    print("Server starting at http://127.0.0.1:5000")
+    
     try:
         t_scan = threading.Thread(target=scan_videos, daemon=True)
         t_scan.start()
-        t_server = threading.Thread(target=start_server, daemon=True)
-        t_server.start()
-
-        time.sleep(1)
-
-        if webview:
-            try:
-                webview.create_window(
-                    'Home Theater',
-                    'http://127.0.0.1:5000',
-                    width=1280, height=800,
-                    confirm_close=True,
-                    background_color='#000000'
-                )
-                webview.start()
-            except Exception as e:
-                print(f"Webview error: {e}")
-                print("Opening in browser...")
-                webbrowser.open('http://127.0.0.1:5000')
-                while True:
-                    time.sleep(1)
-        else:
-            print("Opening in browser...")
-            webbrowser.open('http://127.0.0.1:5000')
-            while True:
-                time.sleep(1)
-
+        
+        serve(app, host='127.0.0.1', port=5000, threads=20)
     except Exception as e:
         with open("error_log.txt", "w") as f:
             f.write(str(e))
             traceback.print_exc(file=f)
+

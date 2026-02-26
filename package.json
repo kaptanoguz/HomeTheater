@@ -1,0 +1,46 @@
+{
+    "name": "home-theater",
+    "version": "3.0.0",
+    "description": "A modern media catalog and player for your local movie and TV series collection.",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electron .",
+        "build:linux": "electron-builder --linux deb"
+    },
+    "author": "kaptanoguz <kaptanoguz@gmail.com>",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "wait-on": "^7.2.0"
+    },
+    "devDependencies": {
+        "electron": "^28.2.3",
+        "electron-builder": "^24.13.3"
+    },
+    "build": {
+        "appId": "com.kaptanoguz.hometheater",
+        "productName": "Home Theater",
+        "directories": {
+            "output": "dist"
+        },
+        "files": [
+            "src/**/*",
+            "backend/**/*"
+        ],
+        "linux": {
+            "target": [
+                "deb"
+            ],
+            "category": "AudioVideo",
+            "executableName": "home-theater"
+        },
+        "deb": {
+            "depends": [
+                "python3",
+                "python3-flask",
+                "python3-waitress",
+                "python3-requests",
+                "ffmpeg"
+            ]
+        }
+    }
+}
